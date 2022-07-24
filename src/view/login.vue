@@ -73,13 +73,14 @@ export default {
       loginForm.value.validate((valid) => {
         if (valid) {
           axios
-            .post("/adminUser/login", {
-              userName: state.ruleForm.username || "",
+            .post("/api/login", {
+              userName: state.ruleForm.username,
               passwordMd5: state.ruleForm.password,
             })
             .then((res) => {
-              localSet("token", res);
-              window.location.href = "/";
+              // localSet("token", res);
+              console.log(res);
+              // window.location.href = "/";
             });
         } else {
           console.log("error submit!!");

@@ -18,5 +18,14 @@ export default defineConfig({
         remPrecision: 8
       }) // remUnit: 192代表以1920px为整体，如果设计稿的尺寸是750px，这里的值为75
       .end()
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
   }
 })

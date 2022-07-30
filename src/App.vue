@@ -1,37 +1,31 @@
-<script>
-import Menu from "./components/menu.vue";
-
-export default {
-  components: {
-    Menu,
-  },
-  setup() {},
-};
+<script setup>
+// This starter template is using Vue 3 <script setup> SFCs
+// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <el-container class="container">
-    <Menu></Menu>
-    <el-container class="content">
-      <!-- <Header /> -->
-        <router-view />
-    </el-container>
-    <!-- <Footer /> -->
-  </el-container>
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://vuejs.org/" target="_blank">
+      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    </a>
+  </div>
+  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.container {
-  height: 100vh;
-  background-color: #fafafa;
-  width: 100vw;
-  display: flex;
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
 }
-.content {
-  display: flex;
-  flex-direction: column;
-  max-height: 100vh;
-  overflow: auto;
-  padding: 0.625em;
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>

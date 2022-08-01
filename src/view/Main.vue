@@ -1,10 +1,11 @@
 <template>
   <div class="common-layout">
-    <el-container>
-      <el-aside style="width: 12.5rem; height: 100vh"><commonAside /></el-aside>
+    <el-container style="overflow-y;'hidden'">
+      <commonAside />
       <el-container>
-        <el-header style="background-color: rgb(173, 202, 255);"><CommonHeader /></el-header>
-
+        <el-header style="background-color: rgb(173, 202, 255)"
+          ><CommonHeader
+        /></el-header>
         <el-main><router-view /> </el-main>
       </el-container>
     </el-container>
@@ -23,7 +24,16 @@ export default defineComponent({
     return {};
   },
 });
-</script >
-<style scope>
-
+</script>
+<style lang="scss" scope>
+.common-layout {
+  height: 100%;
+  .el-container {
+    height: 100%;
+    .el-aside{
+      height: 100%;
+      background-color: #545c64;
+    }
+  }
+}
 </style>

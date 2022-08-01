@@ -1,14 +1,17 @@
 <template>
   <div class="contain">
     <div class="content1">
-      <el-icon color="#409EFC" class="no-inherit" :size="20">
-        <Share />
-      </el-icon>
+      <el-button class="Hbutton" plain @click="changeCollapse">
+        <el-icon color="#409EFC" class="no-inherit" :size="20">
+          <Menu />
+        </el-icon>
+      </el-button>
+      <h3>首页</h3>
     </div>
     <div class="content2">
-      <el-dropdown :hide-on-click="false" :trigger="contextmenu">
+      <el-dropdown :trigger="click">
         <span class="el-dropdown-link">
-          Dropdown List
+          admin
           <img class="userImg" src="../assets/image/user.png" alt="" />
         </span>
         <template #dropdown>
@@ -23,11 +26,17 @@
 </template>
 
 <script>
-export default {
+import { useStore } from "vuex";
+import { defineComponent } from "vue";
+export default defineComponent({
   setup() {
-    return {};
+    let store = useStore();
+    const changeCollapse = () => {
+      store.commit("updateIsCollapse");
+    };
+    return {changeCollapse};
   },
-};
+});
 </script>
 
 <style scoped>
@@ -36,6 +45,12 @@ export default {
   justify-content: space-between;
   line-height: 3.75rem;
 }
+.content1 {
+  display: flex;
+  justify-content: space-between;
+  width: 7.5rem;
+  vertical-align: middle;
+}
 .el-dropdown-link {
   line-height: 3.75rem;
 }
@@ -43,5 +58,11 @@ export default {
   height: 2.5rem;
   width: 2.5rem;
   vertical-align: middle;
+}
+.Hbutton {
+  margin: auto 0;
+}
+.userImg {
+  margin-left: 1rem;
 }
 </style>

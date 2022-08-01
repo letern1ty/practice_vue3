@@ -12,11 +12,5 @@ export default {
 };
 </script>
 
-<style  scoped>
-#app {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
+<style lang="scss" scoped>
 </style>

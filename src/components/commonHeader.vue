@@ -1,28 +1,25 @@
 <template>
-  <el-header>
+  <div class="contain">
     <div class="content1">
       <el-icon color="#409EFC" class="no-inherit" :size="20">
         <Share />
       </el-icon>
     </div>
     <div class="content2">
-      <el-dropdown :hide-on-click="false">
+      <el-dropdown :hide-on-click="false" :trigger="contextmenu">
         <span class="el-dropdown-link">
-          Dropdown List<el-icon class="el-icon--right"><arrow-down /></el-icon>
+          Dropdown List
+          <img class="userImg" src="../assets/image/user.png" alt="" />
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Action 1</el-dropdown-item>
-            <el-dropdown-item>Action 2</el-dropdown-item>
             <el-dropdown-item>Action 3</el-dropdown-item>
-            <el-dropdown-item disabled>Action 4</el-dropdown-item>
-            <el-dropdown-item divided>Action 5</el-dropdown-item>
             <el-dropdown-item divided>Action 6</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </div>
-  </el-header>
+  </div>
 </template>
 
 <script>
@@ -34,9 +31,17 @@ export default {
 </script>
 
 <style scoped>
-el-header{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+.contain {
+  display: flex;
+  justify-content: space-between;
+  line-height: 3.75rem;
+}
+.el-dropdown-link {
+  line-height: 3.75rem;
+}
+.userImg {
+  height: 2.5rem;
+  width: 2.5rem;
+  vertical-align: middle;
 }
 </style>

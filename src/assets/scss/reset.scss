@@ -1,0 +1,65 @@
+html,
+body,
+div,
+span,
+object,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+video,
+img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  height: 100%;
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+//公共样式
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+  .button-group-item {
+    padding-left: 3px;
+  }
+}
+
+.clearfix {
+  zoom: 1;
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+body{
+    background-color: #f9f9f9;
+}

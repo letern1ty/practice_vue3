@@ -48,8 +48,10 @@
 <script>
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
   setup() {
+    let store = useStore();
     const router = useRouter();
     const list = [
       {
@@ -97,14 +99,12 @@ export default defineComponent({
       return list.filter((item) => item.children);
     };
     //el 菜单方法
-    const handleOpen = (key, keyPath) => {
-    };
-    const handleClose = (key, keyPath) => {
-    };
+    const handleOpen = (key, keyPath) => {};
+    const handleClose = (key, keyPath) => {};
 
     // 路由跳转
     const changeMenu = (item) => {
-      console.log(item);
+      store.commit("selectMenu",item);
       router.push({
         name: item.name,
       });

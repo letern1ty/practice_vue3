@@ -26,58 +26,48 @@
         </el-table>
       </el-card>
     </el-col>
+    <el-col :span="16" style="margin-top: 1.25rem">
+      <div class="num">
+        <el-card
+          :body-style="{ display: 'flex', padding: 0 }"
+          v-for="item in countData"
+          :key="item.name"
+        >
+          <el-row>
+            <component
+              :is="item.icon"
+              class="icons"
+              :style="{ background: item.color, fontSize: '1.8rem' }"
+            ></component>
+            <div class="details">
+              <el-col>
+                <p class="count">￥{{ item.value }}</p>
+                <p class="txt">{{ item.name }}</p>
+              </el-col>
+            </div>
+          </el-row>
+        </el-card>
+      </div>
+      <el-card style="height: 17.5rem">
+        <div ref="echarts" style="height: 17.5rem"></div>
+      </el-card>
+    </el-col>
   </el-row>
 </template>
 
 <script>
-import { defineComponent, onMounted } from "vue";
-import axios from "axios";
-export default {
+import {
+  defineComponent,
+  onMounted,
+  ref,
+  getCurrentInstance,
+  reactive,
+} from "vue";
+export default defineComponent({
   setup() {
-    const tableData = [
-      {
-        name: "华为",
-        todayBuy: "1000",
-        monthBuy: "6500",
-        totalBuy: "12000",
-      },
-      {
-        name: "小米",
-        todayBuy: "1200",
-        monthBuy: "10000",
-        totalBuy: "15000",
-      },
-      {
-        name: "苹果",
-        todayBuy: "1500",
-        monthBuy: "20000",
-        totalBuy: "30000",
-      },
-      {
-        name: "三星",
-        todayBuy: "400",
-        monthBuy: "2000",
-        totalBuy: "3000",
-      },
-      {
-        name: "oppo",
-        todayBuy: "400",
-        monthBuy: "2000",
-        totalBuy: "3000",
-      },
-      {
-        name: "vivo",
-        todayBuy: "400",
-        monthBuy: "2000",
-        totalBuy: "3000",
-      },
-      {
-        name: "一加",
-        todayBuy: "400",
-        monthBuy: "2000",
-        totalBuy: "3000",
-      },
-    ];
+    const { proxy } = getCurrentInstance();
+    let tableData = ref([]);
+    let countData = ref([]);
     const tableLabel = {
       name: "机型",
       todayBuy: "今日购买",
@@ -85,16 +75,89 @@ export default {
       totalBuy: "总购买",
     };
     const getTableList = async () => {
-      await axios.get("/home/getData").then((res) => {
-        console.log(res);
-      });
+      //二次封装之后的axios
+      tableData.value = await proxy.$http.getTableData();
     };
+
+    const getCountData = async () => {
+      //二次封装之后的axios
+      countData.value = await proxy.$http.getCountData();
+      let res = await proxy.$http.getCountData();
+      console.log(res);
+    };
+
+    //echarts 渲染
+
+    let xOptions = reactive({
+      xAxis: {
+        type: "category",
+        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      },
+      yAxis: {
+        type: "value",
+      },
+      series: [
+        {
+          data: [150, 230, 224, 218, 135, 147, 260],
+          type: "line",
+        },
+      ],
+    });
+    let pieOptions = reactive({
+      title: {
+        text: "Referer of a Website",
+        subtext: "Fake Data",
+        left: "center",
+      },
+      tooltip: {
+        trigger: "item",
+      },
+      legend: {
+        orient: "vertical",
+        left: "left",
+      },
+      series: [
+        {
+          name: "Access From",
+          type: "pie",
+          radius: "50%",
+          data: [
+            { value: 1048, name: "Search Engine" },
+            { value: 735, name: "Direct" },
+            { value: 580, name: "Email" },
+            { value: 484, name: "Union Ads" },
+            { value: 300, name: "Video Ads" },
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: "rgba(0, 0, 0, 0.5)",
+            },
+          },
+        },
+      ],
+    });
+    let orderData = reactive({
+      xData: [],
+      series: [],
+    });
+
+    let userData = reactive({
+      xData: [],
+      series: [],
+    })
+
+    let videoData = reactive({
+      series: [],
+    })
     onMounted(() => {
       getTableList();
+      getCountData();
     });
-    return { tableData, tableLabel };
+    return { tableData, tableLabel, countData, getCountData };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -121,6 +184,36 @@ export default {
         color: #666;
         margin-left: 2.5rem;
       }
+    }
+  }
+}
+
+.num {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .el-card {
+    width: 32%;
+    margin-bottom: 1.25rem;
+  }
+
+  .icons {
+    width: 5rem;
+    font-size: 1.875rem;
+    line-height: 5rem;
+    color: #fff;
+  }
+
+  .details {
+    margin-left: 1rem;
+    .count {
+      font-size: 2rem;
+      margin-bottom: 0.625rem;
+      color: #e22f2f;
+    }
+    .txt {
+      color: #666;
+      font-size: 0.75rem;
     }
   }
 }

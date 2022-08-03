@@ -64,5 +64,6 @@ export default defineComponent({
 }
 .userImg {
   margin-left: 1rem;
+  border-radius: 50%;
 }
 </style>

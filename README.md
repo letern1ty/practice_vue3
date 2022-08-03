@@ -34,4 +34,7 @@ import "./api/mock.js";
 import homeApi from './mockData/home'
 
 Mock.mock('/home/getData',homeApi.getHomeData)
-```
+``
+
+
+### 在线mock接口 ----- fastMock
